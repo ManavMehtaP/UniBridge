@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniBridge | Smart Notes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-ai {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #142175 0%, #500aba 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e4e1e9",
+                        "surface-container": "#efedf4",
+                        "on-primary-fixed-variant": "#333f91",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-background": "#1b1b21",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#303036",
+                        "background": "#fbf8ff",
+                        "surface-container-low": "#f5f2fa",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#000d60",
+                        "primary-container": "#2e3a8c",
+                        "secondary-container": "#d0e1fb",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#500aba",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c6c5d3",
+                        "surface-container-high": "#e9e7ef",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "outline": "#767682",
+                        "surface-tint": "#4b57aa",
+                        "surface": "#fbf8ff",
+                        "on-tertiary-container": "#bba0ff",
+                        "surface-container-highest": "#e4e1e9",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf8ff",
+                        "inverse-primary": "#bcc3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dbd9e1",
+                        "on-secondary-container": "#54647a",
+                        "on-surface": "#1b1b21",
+                        "tertiary": "#370086",
+                        "primary-fixed": "#dfe0ff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#454651",
+                        "on-primary-container": "#9ea9ff",
+                        "primary-fixed-dim": "#bcc3ff",
+                        "primary": "#142175",
+                        "inverse-on-surface": "#f2eff7",
+                        "on-tertiary-fixed": "#23005c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e9ddff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "xl": "40px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "sidebar-width": "260px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed">
+<!-- Sidebar Layout -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface dark:bg-on-background border-r border-outline-variant dark:border-outline flex flex-col py-6 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">UniBridge</h1>
+<p class="font-label-md text-label-md text-secondary opacity-70">Academic Portal</p>
+</div>
+<nav class="flex-1 space-y-1 px-2 overflow-y-auto custom-scrollbar">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- My Notes -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">My Notes</span>
+</a>
+<!-- Smart Notes (ACTIVE) -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary-fixed font-medium relative before:absolute before:left-0 before:w-1 before:h-6 before:bg-primary before:rounded-full bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-md text-label-md">Smart Notes</span>
+</a>
+<!-- Academic Calendar -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Academic Calendar</span>
+</a>
+<!-- Assignments -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Assignments</span>
+</a>
+<!-- Attendance -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-label-md text-label-md">Attendance</span>
+</a>
+<!-- Announcements -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-md text-label-md">Announcements</span>
+</a>
+<!-- Profile -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors hover:bg-surface-container-low rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Note
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 mt-4 text-secondary hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-surface/70 backdrop-blur-xl border-b border-outline-variant h-16 flex items-center justify-between px-8">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 font-body-md text-body-md focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search academic resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-variant/50 transition-colors rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/50 transition-colors rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Close up professional headshot of a university student for an academic portal profile picture, soft daylighting, clean library background, modern educational aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABB--_EL8NCHvgXOKACv3q8Y0sS5FbS0qKUT9-q1dlSuFE5smcC7R5gMosbInKWrPuzfCGSs4qvejZoOF0v8N6qkobHHmmF5GNYxASITThbpQdeH0AWoUJfiGVeqhn-8JUvar1DxwuqknZQGx8WSFfRFvsON20YKAy3HrrJjH_QNUbQzBsyYdZYqduRHI8D39hXfQNWHR-vhmGz7eYqnlJiaLKlr_UcKviHVyXMjdE7k0IHkjr4fvb_uCF99Vawo_TQmvA1fXxYS4"/>
+</div>
+</div>
+</header>
+<div class="max-w-[1000px] mx-auto p-8">
+<!-- Hero Title -->
+<div class="mb-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-[10px] uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                        AI Powered
+                    </span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-2">Smart Note Analysis</h2>
+<p class="font-body-lg text-body-lg text-secondary">Transform dense academic materials into structured, actionable insights instantly.</p>
+</div>
+<!-- AI Summarizer Input Section -->
+<section class="mb-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- PDF Upload Card -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant hover:border-primary/30 transition-all group cursor-pointer">
+<div class="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">upload_file</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-1">Upload PDF</h3>
+<p class="font-body-md text-body-md text-secondary mb-4">Drag and drop your textbooks or lecture slides here.</p>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-4 text-center group-hover:border-primary transition-colors">
+<span class="font-label-md text-label-md text-outline">Maximum size: 50MB</span>
+</div>
+</div>
+<!-- Select from Notes Card -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant hover:border-tertiary/30 transition-all group">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-xl flex items-center justify-center text-tertiary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-1">From My Notes</h3>
+<p class="font-body-md text-body-md text-secondary mb-4">Select an existing note from your repository to summarize.</p>
+<select class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 font-body-md text-body-md focus:ring-2 focus:ring-tertiary/20">
+<option>Select a note...</option>
+<option>Macroeconomics - Lecture 4</option>
+<option>Organic Chemistry - Benzene Rings</option>
+<option>Advanced Calculus - Integration</option>
+</select>
+</div>
+</div>
+<div class="mt-6 flex justify-center">
+<button class="px-8 py-4 bg-tertiary-container text-on-primary rounded-xl font-label-md text-label-md flex items-center gap-2 hover:shadow-xl hover:shadow-tertiary/20 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">spark</span>
+                        Generate Smart Summary
+                    </button>
+</div>
+</section>
+<!-- Generated Results Section (AI Glassmorphism) -->
+<div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700" id="ai-results">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+<span class="font-label-md text-label-md text-tertiary uppercase tracking-widest px-4">Analysis Results</span>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<!-- Bento Grid Results -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Short Summary (Glass) -->
+<div class="md:col-span-2 glass-ai p-8 rounded-2xl shadow-sm">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary">summarize</span>
+<h3 class="font-title-lg text-title-lg ai-gradient-text font-bold">Executive Summary</h3>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed space-y-4">
+<p>This lecture explores the fundamental principles of **Neural Plasticity**, specifically focusing on how synaptic connections strengthen or weaken over time in response to increases or decreases in their activity.</p>
+<p>The core takeaway is that the brain is not a static organ but a dynamic system capable of structural reorganization based on experience, learning, and environmental stimuli.</p>
+</div>
+</div>
+<!-- Key Concepts (Chips) -->
+<div class="glass-ai p-6 rounded-2xl shadow-sm flex flex-col">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-tertiary">tag</span>
+<h3 class="font-title-lg text-title-lg ai-gradient-text font-bold">Key Concepts</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-full bg-tertiary-fixed/40 border border-tertiary-container/20 font-label-md text-label-md text-on-tertiary-fixed-variant">LTP (Long-Term Potentiation)</span>
+<span class="px-3 py-1.5 rounded-full bg-tertiary-fixed/40 border border-tertiary-container/20 font-label-md text-label-md text-on-tertiary-fixed-variant">Synaptic Pruning</span>
+<span class="px-3 py-1.5 rounded-full bg-tertiary-fixed/40 border border-tertiary-container/20 font-label-md text-label-md text-on-tertiary-fixed-variant">Neurogenesis</span>
+<span class="px-3 py-1.5 rounded-full bg-tertiary-fixed/40 border border-tertiary-container/20 font-label-md text-label-md text-on-tertiary-fixed-variant">Hebb's Law</span>
+<span class="px-3 py-1.5 rounded-full bg-tertiary-fixed/40 border border-tertiary-container/20 font-label-md text-label-md text-on-tertiary-fixed-variant">Axonal Sprouting</span>
+<span class="px-3 py-1.5 rounded-full bg-tertiary-fixed/40 border border-tertiary-container/20 font-label-md text-label-md text-on-tertiary-fixed-variant">Myelination</span>
+</div>
+</div>
+<!-- Important Points -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant shadow-sm md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">format_list_bulleted</span>
+<h3 class="font-title-lg text-title-lg text-primary font-bold">Important Points</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+<p class="font-body-md text-body-md">Synapses are the primary sites of information storage in the nervous system.</p>
+</li>
+<li class="flex gap-3">
+<span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+<p class="font-body-md text-body-md">Experience-dependent plasticity is most vigorous during critical periods of development.</p>
+</li>
+<li class="flex gap-3">
+<span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+<p class="font-body-md text-body-md">NMDA receptors play a crucial role in inducing synaptic changes.</p>
+</li>
+<li class="flex gap-3">
+<span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+<p class="font-body-md text-body-md">The "Use it or Lose it" principle governs neural pathway maintenance.</p>
+</li>
+</ul>
+</div>
+<!-- Important Questions -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant shadow-sm md:col-span-2">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary">quiz</span>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold">Questions for Review</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="font-title-lg text-secondary opacity-30 italic">Q1.</span>
+<p class="font-body-md text-body-md font-medium">Explain the molecular mechanism by which LTP is established in the hippocampus.</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="font-title-lg text-secondary opacity-30 italic">Q2.</span>
+<p class="font-body-md text-body-md font-medium">Differentiate between synaptic plasticity and structural plasticity.</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="font-title-lg text-secondary opacity-30 italic">Q3.</span>
+<p class="font-body-md text-body-md font-medium">How does the concept of neuroplasticity challenge earlier "localization of function" theories?</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="font-title-lg text-secondary opacity-30 italic">Q4.</span>
+<p class="font-body-md text-body-md font-medium">What role does Brain-Derived Neurotrophic Factor (BDNF) play in learning?</p>
+</div>
+</div>
+</div>
+<!-- Revision Notes Summary -->
+<div class="md:col-span-3 glass-ai p-8 rounded-2xl border-l-4 border-l-tertiary shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-5">
+<span class="material-symbols-outlined text-[120px]">edit_note</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary">history_edu</span>
+<h3 class="font-headline-md text-headline-md ai-gradient-text font-bold">Revision Flashcards Summary</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+<div class="space-y-2">
+<h4 class="font-label-md text-label-md uppercase text-tertiary tracking-tighter">Term</h4>
+<p class="font-body-lg text-body-lg font-bold">Hebbian Theory</p>
+<p class="font-body-md text-body-md text-secondary">"Neurons that fire together, wire together." Simple mnemonic for synaptic reinforcement.</p>
+</div>
+<div class="space-y-2">
+<h4 class="font-label-md text-label-md uppercase text-tertiary tracking-tighter">Application</h4>
+<p class="font-body-lg text-body-lg font-bold">Skill Acquisition</p>
+<p class="font-body-md text-body-md text-secondary">Repetition leads to myelination, increasing signal speed and efficiency for complex motor tasks.</p>
+</div>
+<div class="space-y-2">
+<h4 class="font-label-md text-label-md uppercase text-tertiary tracking-tighter">Mechanism</h4>
+<p class="font-body-lg text-body-lg font-bold">Dendritic Spines</p>
+<p class="font-body-md text-body-md text-secondary">Physical protrusions from dendrites that grow in size during the potentiation process.</p>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-tertiary/10 flex justify-end gap-3">
+<button class="px-4 py-2 border border-tertiary/20 text-tertiary rounded-lg font-label-md text-label-md hover:bg-tertiary/5 transition-colors">Export to PDF</button>
+<button class="px-4 py-2 bg-tertiary text-on-tertiary rounded-lg font-label-md text-label-md hover:shadow-lg transition-all">Save to My Notes</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Spacing -->
+<div class="h-20"></div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - For New Task/Note -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[28px]">edit</span>
+</button>
+<script>
+        // Micro-interaction for smooth scrolling or any dynamic state if needed
+        document.querySelectorAll('button, a').forEach(elem => {
+            elem.addEventListener('mousedown', () => {
+                elem.style.transform = 'scale(0.98)';
+            });
+            elem.addEventListener('mouseup', () => {
+                elem.style.transform = '';
+            });
+        });
+
+        // Simulating an AI generation state (visual only)
+        function triggerAIAnimation() {
+            const results = document.getElementById('ai-results');
+            results.classList.add('opacity-40', 'blur-sm');
+            setTimeout(() => {
+                results.classList.remove('opacity-40', 'blur-sm');
+            }, 1200);
+        }
+    </script>
+</body></html>
