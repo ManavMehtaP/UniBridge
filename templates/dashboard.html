@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block title %}UniBridge | Student Dashboard{% endblock %}
+
+{% block content %}
+<!-- Dashboard Content -->
+<div class="p-6 md:p-8 max-w-container-max mx-auto w-full space-y-8">
+    <!-- Greeting -->
+    <section>
+        <h2 class="font-headline-lg text-headline-lg text-on-background">Hello Student 👋</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Ready to crush your study goals for today?</p>
+    </section>
+    <!-- Primary Section: Smart Study Planner -->
+    <section class="space-y-6">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-3xl" data-icon="auto_awesome">auto_awesome</span>
+                <h3 class="font-headline-md text-headline-md text-on-background">Smart Study Planner</h3>
+            </div>
+            <span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">AI POWERED</span>
+        </div>
+        <!-- Status Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                <div>
+                    <p class="font-label-md text-label-md text-secondary uppercase mb-2">Active Plan</p>
+                    <h4 class="font-title-lg text-title-lg font-bold text-primary">End Semester Prep</h4>
+                </div>
+                <div class="mt-4 flex items-center gap-2 text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm" data-icon="book">book</span>
+                    <span class="font-body-md text-body-md">5 Subjects</span>
+                    <span class="mx-1 text-outline-variant">•</span>
+                    <span class="font-body-md text-body-md text-error">14 Days Left</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                <p class="font-label-md text-label-md text-secondary uppercase mb-2">Exam Countdown</p>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-4xl font-bold text-on-background">12</span>
+                    <span class="text-secondary font-body-md">days</span>
+                </div>
+                <div class="w-full bg-surface-container rounded-full h-1.5 mt-4">
+                    <div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)] flex items-center justify-between">
+                <div>
+                    <p class="font-label-md text-label-md text-secondary uppercase mb-2">Overall Completion</p>
+                    <span class="text-3xl font-bold text-on-background">65%</span>
+                </div>
+                <div class="relative w-16 h-16">
+                    <svg class="w-full h-full">
+                        <circle class="text-surface-container" cx="32" cy="32" fill="transparent" r="24" stroke="currentColor" stroke-width="6"></circle>
+                        <circle class="text-primary progress-ring__circle" cx="32" cy="32" fill="transparent" r="24" stroke="currentColor" stroke-dasharray="150.8" stroke-dashoffset="52.78" stroke-linecap="round" stroke-width="6"></circle>
+                    </svg>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                <p class="font-label-md text-label-md text-secondary uppercase mb-2">Daily Goal</p>
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl font-bold text-on-background">4/6</span>
+                    <span class="text-secondary font-body-md">Hours</span>
+                </div>
+                <div class="flex items-center gap-1 mt-4">
+                    <div class="h-2 flex-1 bg-primary rounded-full"></div>
+                    <div class="h-2 flex-1 bg-primary rounded-full"></div>
+                    <div class="h-2 flex-1 bg-primary rounded-full"></div>
+                    <div class="h-2 flex-1 bg-primary rounded-full"></div>
+                    <div class="h-2 flex-1 bg-surface-container rounded-full"></div>
+                    <div class="h-2 flex-1 bg-surface-container rounded-full"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabbed Planner Interface -->
+        <div class="bg-white rounded-2xl border border-outline-variant overflow-hidden">
+            <div class="flex border-b border-outline-variant px-6">
+                <button class="px-4 py-4 border-b-2 border-primary text-primary font-semibold text-body-md">Today's Plan</button>
+                <button class="px-4 py-4 text-on-surface-variant hover:text-primary transition-colors text-body-md">Subject Progress</button>
+                <button class="px-4 py-4 text-on-surface-variant hover:text-primary transition-colors text-body-md">Full Schedule</button>
+                <button class="px-4 py-4 text-on-surface-variant hover:text-primary transition-colors text-body-md">Plan Settings</button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-outline-variant">
+                <!-- Main Plan List -->
+                <div class="lg:col-span-2 p-6 space-y-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-title-lg text-title-lg font-bold">Today's Tasks</h4>
+                        <span class="text-body-md text-secondary">Oct 24, 2023</span>
+                    </div>
+                    <!-- Task Card -->
+                    <div class="glass-ai p-5 rounded-xl flex items-start justify-between gap-4 group hover:shadow-md transition-all">
+                        <div class="flex gap-4">
+                            <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                <span class="material-symbols-outlined" data-icon="code">code</span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Unit 3</span>
+                                    <span class="text-secondary text-xs">45m Estimated</span>
+                                </div>
+                                <h5 class="font-body-lg text-body-lg font-semibold text-on-background">Python: Exception Handling</h5>
+                                <p class="text-body-md text-on-surface-variant mt-1">Review try-except blocks and custom exception classes.</p>
+                            </div>
+                        </div>
+                        <button class="shrink-0 flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-body-md font-medium hover:bg-primary-container transition-all">
+                            <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+                            Mark Complete
+                        </button>
+                    </div>
+                    <!-- Task Card 2 -->
+                    <div class="bg-surface-container-low p-5 rounded-xl flex items-start justify-between gap-4">
+                        <div class="flex gap-4">
+                            <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+                                <span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Unit 2</span>
+                                    <span class="text-secondary text-xs">1h Estimated</span>
+                                </div>
+                                <h5 class="font-body-lg text-body-lg font-semibold text-on-background">TOC: DFA/NFA Construction</h5>
+                                <p class="text-body-md text-on-surface-variant mt-1">Solve 5 practice problems from previous year questions.</p>
+                            </div>
+                        </div>
+                        <button class="shrink-0 text-outline hover:text-primary p-2">
+                            <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                        </button>
+                    </div>
+                    <button class="w-full py-3 border-2 border-dashed border-outline-variant rounded-xl text-secondary hover:border-primary hover:text-primary transition-all font-medium text-body-md flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined" data-icon="add">add</span>
+                        Add Custom Task
+                    </button>
+                </div>
+                <!-- Sidebar Detail / Calendar Sync -->
+                <div class="bg-surface-container-lowest p-6 space-y-6">
+                    <div class="bg-secondary-container/30 p-4 rounded-xl border border-secondary-container">
+                        <div class="flex items-center gap-2 text-on-secondary-container mb-3">
+                            <span class="material-symbols-outlined text-xl" data-icon="sync">sync</span>
+                            <h5 class="font-label-md text-label-md font-bold uppercase">Calendar Sync</h5>
+                        </div>
+                        <p class="text-body-md font-semibold text-on-surface mb-1">Next unavailable day</p>
+                        <p class="text-body-md text-on-surface-variant mb-4">Monday, Oct 27 (Rescheduled due to Lab Exam)</p>
+                        <div class="bg-white/60 p-3 rounded-lg border border-outline-variant flex items-start gap-2">
+                            <span class="material-symbols-outlined text-tertiary text-sm mt-0.5" data-icon="auto_mode">auto_mode</span>
+                            <p class="text-xs text-on-surface-variant italic leading-relaxed">Planner automatically adjusts your daily load to compensate for missing sessions.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <h5 class="font-label-md text-label-md font-bold uppercase text-secondary">Quick Stats</h5>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center text-body-md">
+                                <span class="text-on-surface-variant">Focus Streak</span>
+                                <span class="font-bold text-on-background">5 Days 🔥</span>
+                            </div>
+                            <div class="flex justify-between items-center text-body-md">
+                                <span class="text-on-surface-variant">Topics Cleared</span>
+                                <span class="font-bold text-on-background">24/38</span>
+                            </div>
+                            <div class="flex justify-between items-center text-body-md">
+                                <span class="text-on-surface-variant">Study Velocity</span>
+                                <span class="font-bold text-on-background">1.2x (Fast)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Quick Access Grid -->
+    <section class="space-y-6">
+        <h3 class="font-headline-md text-headline-md text-on-background">Quick Access Center</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Quiz Center -->
+            <a class="group bg-white p-6 rounded-2xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all" href="#">
+                <div class="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+                </div>
+                <h4 class="font-title-lg text-title-lg font-bold text-on-background">Quiz Center</h4>
+                <p class="text-body-md text-on-surface-variant mt-1">12 Faculty &amp; AI Quizzes available</p>
+            </a>
+            <!-- AI Assistant -->
+            <a class="group bg-white p-6 rounded-2xl border border-outline-variant hover:border-tertiary hover:shadow-xl transition-all relative overflow-hidden" href="#">
+                <div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <span class="material-symbols-outlined text-8xl" data-icon="auto_awesome">auto_awesome</span>
+                </div>
+                <div class="h-12 w-12 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                </div>
+                <h4 class="font-title-lg text-title-lg font-bold text-on-background">AI Assistant</h4>
+                <p class="text-body-md text-on-surface-variant mt-1">Instant doubt solving &amp; summaries</p>
+            </a>
+            <!-- PYQ Analyzer -->
+            <a class="group bg-white p-6 rounded-2xl border border-outline-variant hover:border-secondary hover:shadow-xl transition-all" href="#">
+                <div class="h-12 w-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                </div>
+                <h4 class="font-title-lg text-title-lg font-bold text-on-background">PYQ Analyzer</h4>
+                <p class="text-body-md text-on-surface-variant mt-1">Past 5 year trends &amp; patterns</p>
+            </a>
+            <!-- Study Materials -->
+            <a class="group bg-white p-6 rounded-2xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all" href="#">
+                <div class="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+                </div>
+                <h4 class="font-title-lg text-title-lg font-bold text-on-background">Study Materials</h4>
+                <p class="text-body-md text-on-surface-variant mt-1">Access all faculty uploads</p>
+            </a>
+        </div>
+    </section>
+    <!-- Bottom Spacer -->
+    <div class="h-12"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize progress rings
+    window.addEventListener('DOMContentLoaded', () => {
+        const circle = document.querySelector('.progress-ring__circle');
+        if (circle) {
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            // Set to 65% as per content
+            const offset = circumference - (65 / 100 * circumference);
+            circle.style.strokeDashoffset = offset;
+        }
+    });
+</script>
+{% endblock %}

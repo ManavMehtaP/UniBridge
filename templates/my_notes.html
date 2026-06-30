@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}My Notes - UniBridge{% endblock %}
+
+{% block content %}
+<div class="p-6 md:p-8 max-w-container-max mx-auto w-full space-y-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-background">My Notes</h2>
+            <p class="text-secondary font-body-md mt-1">Your personal study notes and materials</p>
+        </div>
+        <button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label-md flex items-center gap-2 hover:opacity-90 transition-all">
+            <span class="material-symbols-outlined">add</span>
+            Create Note
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Note Card 1 -->
+        <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold">Python</span>
+                <span class="text-secondary text-xs">Oct 20, 2023</span>
+            </div>
+            <h3 class="font-title-lg text-title-lg font-bold text-on-background mb-2">Exception Handling</h3>
+            <p class="text-body-md text-on-surface-variant line-clamp-3">Review try-except blocks, custom exception classes, and best practices for error handling in Python applications.</p>
+            <div class="flex items-center gap-2 mt-4 text-secondary text-sm">
+                <span class="material-symbols-outlined text-sm">description</span>
+                <span>2 pages</span>
+            </div>
+        </div>
+
+        <!-- Note Card 2 -->
+        <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+                <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-semibold">TOC</span>
+                <span class="text-secondary text-xs">Oct 18, 2023</span>
+            </div>
+            <h3 class="font-title-lg text-title-lg font-bold text-on-background mb-2">DFA/NFA Construction</h3>
+            <p class="text-body-md text-on-surface-variant line-clamp-3">Step-by-step guide to constructing Deterministic and Non-Deterministic Finite Automata from regular expressions.</p>
+            <div class="flex items-center gap-2 mt-4 text-secondary text-sm">
+                <span class="material-symbols-outlined text-sm">description</span>
+                <span>4 pages</span>
+            </div>
+        </div>
+
+        <!-- Note Card 3 -->
+        <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+                <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-xs font-semibold">Database</span>
+                <span class="text-secondary text-xs">Oct 15, 2023</span>
+            </div>
+            <h3 class="font-title-lg text-title-lg font-bold text-on-background mb-2">SQL Joins Reference</h3>
+            <p class="text-body-md text-on-surface-variant line-clamp-3">Quick reference guide for INNER, LEFT, RIGHT, and FULL OUTER JOINs with examples.</p>
+            <div class="flex items-center gap-2 mt-4 text-secondary text-sm">
+                <span class="material-symbols-outlined text-sm">description</span>
+                <span>1 page</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

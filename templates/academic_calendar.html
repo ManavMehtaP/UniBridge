@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Academic Calendar | UniBridge{% endblock %}
+
+{% block content %}
+<div class="p-6 md:p-8 max-w-container-max mx-auto w-full space-y-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-background">Academic Calendar</h2>
+            <p class="text-secondary font-body-md mt-1">View your schedule, exams, and important dates</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="p-2 hover:bg-surface-variant/50 transition-colors rounded-full text-secondary">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <span class="font-title-lg text-title-lg font-bold text-on-background">October 2023</span>
+            <button class="p-2 hover:bg-surface-variant/50 transition-colors rounded-full text-secondary">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="bg-white rounded-2xl border border-outline-variant overflow-hidden">
+        <div class="grid grid-cols-7 border-b border-outline-variant">
+            <div class="p-4 text-center font-label-md text-secondary">Sun</div>
+            <div class="p-4 text-center font-label-md text-secondary">Mon</div>
+            <div class="p-4 text-center font-label-md text-secondary">Tue</div>
+            <div class="p-4 text-center font-label-md text-secondary">Wed</div>
+            <div class="p-4 text-center font-label-md text-secondary">Thu</div>
+            <div class="p-4 text-center font-label-md text-secondary">Fri</div>
+            <div class="p-4 text-center font-label-md text-secondary">Sat</div>
+        </div>
+        <div class="grid grid-cols-7">
+            <!-- Week 1 -->
+            <div class="p-4 border-b border-r border-outline-variant text-secondary text-center">28</div>
+            <div class="p-4 border-b border-r border-outline-variant text-secondary text-center">29</div>
+            <div class="p-4 border-b border-r border-outline-variant text-secondary text-center">30</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">1</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">2</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">3</div>
+            <div class="p-4 border-b border-outline-variant text-center">4</div>
+            <!-- Week 2 -->
+            <div class="p-4 border-b border-r border-outline-variant text-center">5</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">6</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">7</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">8</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">9</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">10</div>
+            <div class="p-4 border-b border-outline-variant text-center">11</div>
+            <!-- Week 3 -->
+            <div class="p-4 border-b border-r border-outline-variant text-center">12</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">13</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">14</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">15</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">16</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">17</div>
+            <div class="p-4 border-b border-outline-variant text-center">18</div>
+            <!-- Week 4 -->
+            <div class="p-4 border-b border-r border-outline-variant text-center">19</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">20</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">21</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">22</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">23</div>
+            <div class="p-4 border-b border-r border-outline-variant bg-primary/10 text-center font-bold text-primary">24</div>
+            <div class="p-4 border-b border-outline-variant text-center">25</div>
+            <!-- Week 5 -->
+            <div class="p-4 border-b border-r border-outline-variant text-center">26</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">27</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">28</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">29</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">30</div>
+            <div class="p-4 border-b border-r border-outline-variant text-center">31</div>
+            <div class="p-4 border-b border-outline-variant text-secondary text-center">1</div>
+        </div>
+    </div>
+
+    <!-- Upcoming Events -->
+    <div class="space-y-4">
+        <h3 class="font-headline-md text-headline-md text-on-background">Upcoming Events</h3>
+        <div class="space-y-3">
+            <div class="bg-white rounded-xl p-4 border border-outline-variant flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-error/10 flex flex-col items-center justify-center text-error">
+                    <span class="text-xs font-bold">OCT</span>
+                    <span class="text-lg font-bold">24</span>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-body-lg font-semibold text-on-background">Assignment Due: Advanced Algorithms</h4>
+                    <p class="text-sm text-secondary">11:59 PM</p>
+                </div>
+                <span class="bg-error/10 text-error px-3 py-1 rounded-full text-xs font-semibold">High Priority</span>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-outline-variant flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-primary/10 flex flex-col items-center justify-center text-primary">
+                    <span class="text-xs font-bold">OCT</span>
+                    <span class="text-lg font-bold">26</span>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-body-lg font-semibold text-on-background">Quiz: Database Systems</h4>
+                    <p class="text-sm text-secondary">02:30 PM</p>
+                </div>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold">Quiz</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

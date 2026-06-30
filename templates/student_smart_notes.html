@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Notes — Student Portal</title>
+<link rel="stylesheet" href="{% static 'css/hod.css' %}">
+<style>
+.smart-notes-container { display: grid; grid-template-columns: 1fr 350px; gap: 20px; }
+.input-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.input-group { margin-bottom: 16px; }
+.input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-control { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; transition: all 0.15s; }
+.form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+textarea.form-control { min-height: 120px; resize: vertical; }
+.generate-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.generate-btn:hover { background: var(--primary-dark); }
+.generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.output-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
+.output-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.output-content { font-size: 13px; line-height: 1.6; color: var(--text-secondary); }
+.output-content p { margin-bottom: 12px; }
+.output-content h3 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 16px 0 8px; }
+.output-content ul { padding-left: 20px; margin-bottom: 12px; }
+.output-content li { margin-bottom: 4px; }
+.output-actions { display: flex; gap: 8px; margin-top: 16px; }
+.action-btn { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; background: var(--surface); display: flex; align-items: center; justify-content: center; gap: 6px; }
+.action-btn:hover { background: var(--surface-2); border-color: var(--primary); }
+.action-btn.primary { background: var(--primary-light); border-color: var(--primary-mid); color: var(--primary); }
+.loading-spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.recent-notes { margin-top: 20px; }
+.recent-note-item { padding: 12px; border: 1px solid var(--border-light); border-radius: var(--radius-sm); margin-bottom: 8px; cursor: pointer; transition: all 0.15s; }
+.recent-note-item:hover { border-color: var(--primary); background: var(--primary-light); }
+.recent-note-title { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+.recent-note-subject { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-mount"></div>
+  <main class="main">
+    <div id="topbar-mount"></div>
+    <div class="page-content">
+
+      <div class="dash-hero">
+        <div>
+          <h1>Smart Notes</h1>
+          <p>Generate AI-powered notes from your study materials</p>
+        </div>
+      </div>
+
+      <div class="smart-notes-container">
+        <div>
+          <div class="input-section">
+            <div class="input-group">
+              <label>Topic</label>
+              <input type="text" class="form-control" id="topicInput" placeholder="e.g., Binary Search Trees, SQL Joins, Process Scheduling">
+            </div>
+            <div class="input-group">
+              <label>Subject</label>
+              <select class="form-control" id="subjectSelect">
+                <option value="">Select a subject</option>
+                <option value="ds">Data Structures</option>
+                <option value="dbms">DBMS</option>
+                <option value="os">Operating Systems</option>
+                <option value="cn">Computer Networks</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Additional Context (Optional)</label>
+              <textarea class="form-control" id="contextInput" placeholder="Add any specific points, examples, or focus areas you want included..."></textarea>
+            </div>
+            <button class="generate-btn" id="generateBtn" onclick="generateNote()">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+              Generate Smart Note
+            </button>
+          </div>
+
+          <div class="output-section" id="outputSection" style="display:none;margin-top:20px">
+            <div class="output-header">
+              <div class="output-title">Generated Note</div>
+              <div class="output-actions">
+                <button class="action-btn" onclick="copyNote()">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </button>
+                <button class="action-btn primary" onclick="saveNote()">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Save to Notes
+                </button>
+              </div>
+            </div>
+            <div class="output-content" id="outputContent"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Recent Smart Notes</div>
+            </div>
+            <div class="recent-notes">
+              <div class="recent-note-item" onclick="loadRecentNote('bst')">
+                <div class="recent-note-title">Binary Search Trees</div>
+                <div class="recent-note-subject">Data Structures • 2h ago</div>
+              </div>
+              <div class="recent-note-item" onclick="loadRecentNote('joins')">
+                <div class="recent-note-title">SQL Joins Explained</div>
+                <div class="recent-note-subject">DBMS • 1d ago</div>
+              </div>
+              <div class="recent-note-item" onclick="loadRecentNote('scheduling')">
+                <div class="recent-note-title">Process Scheduling Algorithms</div>
+                <div class="recent-note-subject">Operating Systems • 3d ago</div>
+              </div>
+              <div class="recent-note-item" onclick="loadRecentNote('topologies')">
+                <div class="recent-note-title">Network Topologies</div>
+                <div class="recent-note-subject">Computer Networks • 5d ago</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="card-header">
+              <div class="card-title">Tips</div>
+            </div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6">
+              <p style="margin-bottom:8px">• Be specific with your topic for better results</p>
+              <p style="margin-bottom:8px">• Add context to focus on specific aspects</p>
+              <p style="margin-bottom:8px">• Select the correct subject for better categorization</p>
+              <p>• Review and edit generated notes before saving</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+function generateNote() {
+  const topic = document.getElementById('topicInput').value;
+  const subject = document.getElementById('subjectSelect').value;
+  const context = document.getElementById('contextInput').value;
+  
+  if (!topic) {
+    showToast('Please enter a topic', 'error');
+    return;
+  }
+  
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="loading-spinner"></div> Generating...';
+  
+  setTimeout(() => {
+    const output = document.getElementById('outputSection');
+    const content = document.getElementById('outputContent');
+    
+    content.innerHTML = `
+      <h3>${topic}</h3>
+      <p><strong>Overview:</strong> This comprehensive note covers the fundamental concepts, key principles, and practical applications of ${topic.toLowerCase()}.</p>
+      
+      <h3>Key Concepts</h3>
+      <ul>
+        <li>Definition and core principles of ${topic.toLowerCase()}</li>
+        <li>Important terminology and notations used in this domain</li>
+        <li>Relationship with related concepts and broader context</li>
+      </ul>
+      
+      <h3>Implementation Details</h3>
+      <ul>
+        <li>Step-by-step approach to implementing ${topic.toLowerCase()}</li>
+        <li>Common algorithms and techniques used</li>
+        <li>Best practices and optimization strategies</li>
+      </ul>
+      
+      <h3>Practical Applications</h3>
+      <ul>
+        <li>Real-world use cases and examples</li>
+        <li>Industry applications and scenarios</li>
+        <li>Integration with other systems and technologies</li>
+      </ul>
+      
+      <h3>Important Notes</h3>
+      <p>${context || 'Make sure to practice implementing these concepts and understand the underlying principles thoroughly.'}</p>
+    `;
+    
+    output.style.display = 'block';
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg> Generate Smart Note';
+    
+    showToast('Smart note generated successfully!', 'success');
+  }, 1500);
+}
+
+function copyNote() {
+  const content = document.getElementById('outputContent').innerText;
+  navigator.clipboard.writeText(content);
+  showToast('Note copied to clipboard', 'success');
+}
+
+function saveNote() {
+  showToast('Note saved to My Notes', 'success');
+}
+
+function loadRecentNote(type) {
+  document.getElementById('topicInput').value = type === 'bst' ? 'Binary Search Trees' : 
+    type === 'joins' ? 'SQL Joins' : 
+    type === 'scheduling' ? 'Process Scheduling' : 'Network Topologies';
+  document.getElementById('subjectSelect').value = type === 'bst' ? 'ds' : 
+    type === 'joins' ? 'dbms' : 
+    type === 'scheduling' ? 'os' : 'cn';
+  showToast('Recent note loaded', 'info');
+}
+</script>
+<script>
+  setStudentUrls({
+    dashboard: "{% url 'dashboard' %}",
+    notes: "{% url 'my_notes' %}",
+    smart_notes: "{% url 'smart_notes' %}",
+    assignments: "{% url 'assignments' %}",
+    calendar: "{% url 'academic_calendar' %}",
+    profile: "{% url 'student_profile' %}",
+    results: "{% url 'dashboard' %}",
+  });
+</script>
+<script src="{% static 'js/student.js' %}"></script>
+<script>
+  document.getElementById('sidebar-mount').innerHTML = renderSidebar('smart_notes');
+  document.getElementById('topbar-mount').innerHTML = renderTopbar('Smart Notes');
+</script>
+</body>
+</html>

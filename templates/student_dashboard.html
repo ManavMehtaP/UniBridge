@@ -1,0 +1,283 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Student Portal</title>
+<link rel="stylesheet" href="{% static 'css/hod.css' %}">
+<style>
+.dash-hero { margin-bottom: 20px; }
+.dash-hero h1 { font-size: 24px; font-weight: 700; }
+.dash-hero p { color: var(--text-secondary); font-size: 13px; margin-top: 2px; }
+.hero-meta { display: flex; gap: 10px; margin-top: 10px; align-items: center; }
+.meta-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+  background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-mid);
+}
+.charts-row { display: grid; grid-template-columns: 1fr 340px 260px; gap: 16px; margin-bottom: 20px; }
+.activity-list { list-style: none; }
+.activity-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-light); }
+.activity-item:last-child { border-bottom: none; }
+.activity-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+.activity-body { flex: 1; }
+.activity-title { font-size: 13px; font-weight: 500; }
+.activity-sub { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+.activity-time { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+.quick-action-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--border); margin-bottom: 8px;
+  cursor: pointer; transition: all 0.15s; text-decoration: none;
+}
+.quick-action-item:hover { background: var(--primary-light); border-color: var(--primary-mid); }
+.quick-action-item:last-child { margin-bottom: 0; }
+.qa-left { display: flex; align-items: center; gap: 10px; }
+.qa-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.qa-label { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-mount"></div>
+  <main class="main">
+    <div id="topbar-mount"></div>
+    <div class="page-content">
+
+      <div class="dash-hero">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1>Good Morning, Student 👋</h1>
+            <p>IT Department • Semester 3</p>
+            <div class="hero-meta">
+              <div class="meta-chip">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Academic Year: 2026 – 2027
+              </div>
+              <div class="meta-chip">
+                <span class="dot" style="width:6px;height:6px;border-radius:50%;background:currentColor"></span> Semester 3 Active
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-head">
+            <div>
+              <div class="stat-value">87.3%</div>
+              <div class="stat-label">Overall Attendance</div>
+            </div>
+            <div class="stat-icon" style="background:var(--success-light)">
+              <svg width="18" height="18" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend positive">+2.1% from last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head">
+            <div>
+              <div class="stat-value">8.2</div>
+              <div class="stat-label">Current CGPA</div>
+            </div>
+            <div class="stat-icon" style="background:var(--primary-light)">
+              <svg width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend positive">Top 15% of class</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head">
+            <div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">Pending Assignments</div>
+            </div>
+            <div class="stat-icon" style="background:var(--warning-light)">
+              <svg width="18" height="18" fill="none" stroke="var(--warning)" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend neutral">3 due this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head">
+            <div>
+              <div class="stat-value">24</div>
+              <div class="stat-label">Notes Created</div>
+            </div>
+            <div class="stat-icon" style="background:var(--purple-light)">
+              <svg width="18" height="18" fill="none" stroke="var(--purple)" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend positive">+5 this month</div>
+        </div>
+      </div>
+
+      <!-- CHARTS ROW -->
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Attendance Overview</div>
+            <div class="card-actions">
+              <button class="icon-btn"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
+          </div>
+          <div style="height:200px">
+            <canvas id="attendanceChart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Upcoming Deadlines</div>
+          </div>
+          <div style="padding:16px 0">
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--danger-light);color:var(--danger)">!</div>
+              <div class="activity-body">
+                <div class="activity-title">Data Structures Assignment</div>
+                <div class="activity-sub">Due Tomorrow</div>
+              </div>
+              <div class="activity-time">1d</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--warning-light);color:var(--warning)">!</div>
+              <div class="activity-body">
+                <div class="activity-title">DBMS Project Report</div>
+                <div class="activity-sub">Due in 3 days</div>
+              </div>
+              <div class="activity-time">3d</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--primary-light);color:var(--primary)">!</div>
+              <div class="activity-body">
+                <div class="activity-title">OS Lab Submission</div>
+                <div class="activity-sub">Due in 5 days</div>
+              </div>
+              <div class="activity-time">5d</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Quick Actions</div>
+          </div>
+          <div style="padding:16px 0">
+            <a href="{% url 'smart_notes' %}" class="quick-action-item">
+              <div class="qa-left">
+                <div class="qa-icon" style="background:var(--primary-light);color:var(--primary)">✨</div>
+                <div class="qa-label">Create Smart Note</div>
+              </div>
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a href="{% url 'assignments' %}" class="quick-action-item">
+              <div class="qa-left">
+                <div class="qa-icon" style="background:var(--warning-light);color:var(--warning)">📝</div>
+                <div class="qa-label">View Assignments</div>
+              </div>
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a href="{% url 'my_notes' %}" class="quick-action-item">
+              <div class="qa-left">
+                <div class="qa-icon" style="background:var(--success-light);color:var(--success)">📚</div>
+                <div class="qa-label">My Notes</div>
+              </div>
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Recent Activity</div>
+          <button class="btn btn-sm" style="border:1px solid var(--border)">View All</button>
+        </div>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <div class="activity-icon" style="background:var(--success-light);color:var(--success)">✓</div>
+            <div class="activity-body">
+              <div class="activity-title">Submitted Data Structures Assignment</div>
+              <div class="activity-sub">Assignment #4 - Binary Trees</div>
+            </div>
+            <div class="activity-time">2h ago</div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon" style="background:var(--primary-light);color:var(--primary)">📝</div>
+            <div class="activity-body">
+              <div class="activity-title">Created new note</div>
+              <div class="activity-sub">Operating Systems - Process Scheduling</div>
+            </div>
+            <div class="activity-time">5h ago</div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon" style="background:var(--purple-light);color:var(--purple)">⭐</div>
+            <div class="activity-body">
+              <div class="activity-title">Generated Smart Note</div>
+              <div class="activity-sub">Database Management Systems - SQL Queries</div>
+            </div>
+            <div class="activity-time">1d ago</div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon" style="background:var(--warning-light);color:var(--warning)">⚠</div>
+            <div class="activity-body">
+              <div class="activity-title">Assignment marked as late</div>
+              <div class="activity-sub">Computer Networks - Network Topologies</div>
+            </div>
+            <div class="activity-time">2d ago</div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  new Chart(document.getElementById('attendanceChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Attendance %',
+        data: [82, 85, 88, 86, 89, 87],
+        borderColor: '#2563EB',
+        backgroundColor: 'rgba(37,99,235,0.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#2563EB',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { mode: 'index' } },
+      scales: {
+        y: { min: 60, max: 100, grid: { color: '#F1F5F9' }, ticks: { callback: v => v + '%', font: { size: 11 } } },
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+</script>
+<script>
+  setStudentUrls({
+    dashboard: "{% url 'dashboard' %}",
+    notes: "{% url 'my_notes' %}",
+    smart_notes: "{% url 'smart_notes' %}",
+    assignments: "{% url 'assignments' %}",
+    calendar: "{% url 'academic_calendar' %}",
+    profile: "{% url 'student_profile' %}",
+    results: "{% url 'dashboard' %}",
+  });
+</script>
+<script src="{% static 'js/student.js' %}"></script>
+<script>
+  document.getElementById('sidebar-mount').innerHTML = renderSidebar('dashboard');
+  document.getElementById('topbar-mount').innerHTML = renderTopbar('Dashboard');
+</script>
+</body>
+</html>

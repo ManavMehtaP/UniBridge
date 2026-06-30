@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Notes — Student Portal</title>
+<link rel="stylesheet" href="{% static 'css/hod.css' %}">
+<style>
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.note-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.note-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
+.note-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.note-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.note-subject { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.note-preview { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.note-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-muted); }
+.note-actions { display: flex; gap: 8px; }
+.note-action { padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.15s; }
+.note-action:hover { background: var(--surface-2); }
+.filter-bar { display: flex; gap: 12px; margin-bottom: 20px; align-items: center; }
+.search-input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; }
+.filter-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; transition: all 0.15s; background: var(--surface); }
+.filter-btn:hover, .filter-btn.active { background: var(--primary-light); border-color: var(--primary-mid); color: var(--primary); }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-mount"></div>
+  <main class="main">
+    <div id="topbar-mount"></div>
+    <div class="page-content">
+
+      <div class="dash-hero">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1>My Notes</h1>
+            <p>24 notes created across 6 subjects</p>
+          </div>
+          <button class="btn btn-primary" onclick="showToast('Create note modal coming soon', 'info')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Note
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" class="search-input" placeholder="Search notes by title, subject, or content...">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Data Structures</button>
+        <button class="filter-btn">DBMS</button>
+        <button class="filter-btn">OS</button>
+        <button class="filter-btn">Networks</button>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card">
+          <div class="note-header">
+            <div>
+              <div class="note-title">Binary Tree Traversals</div>
+              <div class="note-subject">Data Structures</div>
+            </div>
+            <span class="badge badge-success">Complete</span>
+          </div>
+          <div class="note-preview">In-order, pre-order, and post-order traversal algorithms with time complexity analysis and implementation examples in Python...</div>
+          <div class="note-meta">
+            <span>Updated 2h ago</span>
+            <div class="note-actions">
+              <span class="note-action">Edit</span>
+              <span class="note-action">Delete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card">
+          <div class="note-header">
+            <div>
+              <div class="note-title">SQL Joins Explained</div>
+              <div class="note-subject">DBMS</div>
+            </div>
+            <span class="badge badge-warning">Draft</span>
+          </div>
+          <div class="note-preview">Inner join, left join, right join, and full outer join with practical examples and Venn diagrams...</div>
+          <div class="note-meta">
+            <span>Updated 1d ago</span>
+            <div class="note-actions">
+              <span class="note-action">Edit</span>
+              <span class="note-action">Delete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card">
+          <div class="note-header">
+            <div>
+              <div class="note-title">Process Scheduling</div>
+              <div class="note-subject">Operating Systems</div>
+            </div>
+            <span class="badge badge-success">Complete</span>
+          </div>
+          <div class="note-preview">FCFS, SJF, Round Robin, and Priority scheduling algorithms with Gantt charts and turnaround time calculations...</div>
+          <div class="note-meta">
+            <span>Updated 3d ago</span>
+            <div class="note-actions">
+              <span class="note-action">Edit</span>
+              <span class="note-action">Delete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card">
+          <div class="note-header">
+            <div>
+              <div class="note-title">Network Topologies</div>
+              <div class="note-subject">Computer Networks</div>
+            </div>
+            <span class="badge badge-success">Complete</span>
+          </div>
+          <div class="note-preview">Bus, Star, Ring, Mesh, and Tree topologies with advantages, disadvantages, and use cases...</div>
+          <div class="note-meta">
+            <span>Updated 5d ago</span>
+            <div class="note-actions">
+              <span class="note-action">Edit</span>
+              <span class="note-action">Delete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card">
+          <div class="note-header">
+            <div>
+              <div class="note-title">Normalization Forms</div>
+              <div class="note-subject">DBMS</div>
+            </div>
+            <span class="badge badge-success">Complete</span>
+          </div>
+          <div class="note-preview">1NF, 2NF, 3NF, and BCNF with examples and step-by-step normalization process...</div>
+          <div class="note-meta">
+            <span>Updated 1w ago</span>
+            <div class="note-actions">
+              <span class="note-action">Edit</span>
+              <span class="note-action">Delete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card">
+          <div class="note-header">
+            <div>
+              <div class="note-title">Deadlock Prevention</div>
+              <div class="note-subject">Operating Systems</div>
+            </div>
+            <span class="badge badge-warning">Draft</span>
+          </div>
+          <div class="note-preview">Banker's algorithm, resource allocation graph, and deadlock avoidance strategies...</div>
+          <div class="note-meta">
+            <span>Updated 1w ago</span>
+            <div class="note-actions">
+              <span class="note-action">Edit</span>
+              <span class="note-action">Delete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  setStudentUrls({
+    dashboard: "{% url 'dashboard' %}",
+    notes: "{% url 'my_notes' %}",
+    smart_notes: "{% url 'smart_notes' %}",
+    assignments: "{% url 'assignments' %}",
+    calendar: "{% url 'academic_calendar' %}",
+    profile: "{% url 'student_profile' %}",
+    results: "{% url 'dashboard' %}",
+  });
+</script>
+<script src="{% static 'js/student.js' %}"></script>
+<script>
+  document.getElementById('sidebar-mount').innerHTML = renderSidebar('notes');
+  document.getElementById('topbar-mount').innerHTML = renderTopbar('My Notes');
+</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block title %}Assignments | UniBridge Academic Portal{% endblock %}
+
+{% block content %}
+<!-- Assignments Dashboard Content -->
+<div class="p-6 md:p-8 max-w-container-max mx-auto w-full space-y-8">
+    <!-- Page Header & Tabs -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-2">Academic Assignments</h2>
+            <p class="text-secondary font-body-md">Manage your curriculum tasks, submissions, and feedback in one place.</p>
+        </div>
+        <div class="bg-surface-container-low p-1 rounded-xl flex gap-1">
+            <button class="px-6 py-2 rounded-lg bg-surface text-primary font-label-md shadow-sm transition-all" onclick="switchTab('pending', this)">Pending</button>
+            <button class="px-6 py-2 rounded-lg text-secondary font-label-md hover:bg-surface/50 transition-all" onclick="switchTab('submitted', this)">Submitted</button>
+            <button class="px-6 py-2 rounded-lg text-secondary font-label-md hover:bg-surface/50 transition-all" onclick="switchTab('checked', this)">Checked</button>
+        </div>
+    </div>
+    <!-- AI Insight Chip (Smart Layer) -->
+    <div class="ai-glass rounded-2xl p-4 flex items-center gap-4 animate-pulse-slow">
+        <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+            <span class="material-symbols-outlined">auto_awesome</span>
+        </div>
+        <div>
+            <p class="font-label-md text-tertiary">UniBridge AI Insight</p>
+            <p class="text-on-surface-variant text-body-md">You have 2 assignments due in the next 48 hours. We recommend starting with <span class="font-bold text-primary">Advanced Algorithms</span> first based on your usual study velocity.</p>
+        </div>
+        <button class="ml-auto text-tertiary hover:underline font-label-md">Create Study Plan</button>
+    </div>
+    <!-- Content Grid -->
+    <div class="grid grid-cols-12 gap-8">
+        <!-- Table Section (Main Area) -->
+        <div class="col-span-12 xl:col-span-9 space-y-6">
+            <!-- Assignment Card List (Pending) -->
+            <div class="space-y-4" id="pending-section">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:shadow-md transition-shadow group">
+                    <div class="flex gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-3xl">terminal</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5 rounded">CS-402</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-error bg-error-container px-2 py-0.5 rounded">High Priority</span>
+                            </div>
+                            <h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Advanced Algorithms: Optimization Task</h3>
+                            <div class="flex items-center gap-4 mt-2 text-secondary text-body-md">
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    Due Oct 24, 11:59 PM
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">grade</span>
+                                    50 Marks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden md:block">
+                            <p class="text-[11px] text-secondary">Status</p>
+                            <p class="text-body-md font-medium text-error flex items-center gap-1 justify-end">
+                                <span class="w-2 h-2 rounded-full bg-error"></span>
+                                2 Days Left
+                            </p>
+                        </div>
+                        <button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-label-md flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">upload</span>
+                            Upload Submission
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:shadow-md transition-shadow group">
+                    <div class="flex gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-on-tertiary-container/10 flex items-center justify-center text-tertiary shrink-0">
+                            <span class="material-symbols-outlined text-3xl">psychology</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-tertiary bg-tertiary-fixed-dim/20 px-2 py-0.5 rounded">PSY-101</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-surface-variant px-2 py-0.5 rounded">Medium Priority</span>
+                            </div>
+                            <h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Introduction to Neuroplasticity</h3>
+                            <div class="flex items-center gap-4 mt-2 text-secondary text-body-md">
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    Due Oct 28, 09:00 AM
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">grade</span>
+                                    20 Marks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden md:block">
+                            <p class="text-[11px] text-secondary">Status</p>
+                            <p class="text-body-md font-medium text-on-surface-variant flex items-center gap-1 justify-end">
+                                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                6 Days Left
+                            </p>
+                        </div>
+                        <button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-label-md flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">upload</span>
+                            Upload Submission
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:shadow-md transition-shadow group opacity-80 grayscale-[0.5]">
+                    <div class="flex gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-on-secondary-container/10 flex items-center justify-center text-secondary shrink-0">
+                            <span class="material-symbols-outlined text-3xl">menu_book</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-secondary-container bg-secondary-container/20 px-2 py-0.5 rounded">LIT-305</span>
+                            </div>
+                            <h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Victorian Era Prose: Analytical Essay</h3>
+                            <div class="flex items-center gap-4 mt-2 text-secondary text-body-md">
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    Due Nov 02, 11:59 PM
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">grade</span>
+                                    100 Marks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden md:block">
+                            <p class="text-[11px] text-secondary">Status</p>
+                            <p class="text-body-md font-medium text-on-surface-variant flex items-center gap-1 justify-end">
+                                <span class="w-2 h-2 rounded-full bg-outline"></span>
+                                Not Started
+                            </p>
+                        </div>
+                        <button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-label-md flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">upload</span>
+                            Upload Submission
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Sidebar (Contextual Info) -->
+        <div class="col-span-12 xl:col-span-3 space-y-6">
+            <!-- Performance Card -->
+            <div class="bg-white rounded-2xl p-6 border border-outline-variant">
+                <h4 class="font-label-md text-secondary uppercase tracking-widest mb-4">Submission Stats</h4>
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <span class="text-body-md">Completion Rate</span>
+                        <span class="font-bold text-primary">84%</span>
+                    </div>
+                    <div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+                        <div class="bg-primary h-full w-[84%] rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-3 bg-surface-container-low rounded-xl">
+                            <p class="text-[10px] text-secondary uppercase mb-1">On Time</p>
+                            <p class="font-headline-md text-headline-md text-on-surface">12</p>
+                        </div>
+                        <div class="p-3 bg-error-container/20 rounded-xl border border-error/10">
+                            <p class="text-[10px] text-error uppercase mb-1">Overdue</p>
+                            <p class="font-headline-md text-headline-md text-error">1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Calendar Preview / Upcoming Deadlines -->
+            <div class="bg-white rounded-2xl p-6 border border-outline-variant">
+                <h4 class="font-label-md text-secondary uppercase tracking-widest mb-4">Upcoming Deadlines</h4>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-surface-container-low flex flex-col items-center justify-center shrink-0">
+                            <span class="text-[10px] font-bold text-primary">OCT</span>
+                            <span class="text-sm font-bold text-on-surface">24</span>
+                        </div>
+                        <div>
+                            <p class="text-body-md font-medium text-on-surface line-clamp-1">Algorithms Task</p>
+                            <p class="text-[11px] text-error font-medium">11:59 PM (Today)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-surface-container-low flex flex-col items-center justify-center shrink-0">
+                            <span class="text-[10px] font-bold text-primary">OCT</span>
+                            <span class="text-sm font-bold text-on-surface">26</span>
+                        </div>
+                        <div>
+                            <p class="text-body-md font-medium text-on-surface line-clamp-1">Database Quiz</p>
+                            <p class="text-[11px] text-secondary font-medium">02:30 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-surface-container-low flex flex-col items-center justify-center shrink-0">
+                            <span class="text-[10px] font-bold text-primary">OCT</span>
+                            <span class="text-sm font-bold text-on-surface">28</span>
+                        </div>
+                        <div>
+                            <p class="text-body-md font-medium text-on-surface line-clamp-1">Neuroplasticity Paper</p>
+                            <p class="text-[11px] text-secondary font-medium">09:00 AM</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full mt-6 py-2 text-primary font-label-md hover:bg-primary/5 transition-colors rounded-lg border border-primary/20">
+                    View Full Calendar
+                </button>
+            </div>
+            <!-- Mini Image Card -->
+            <div class="rounded-2xl overflow-hidden relative group aspect-[4/3]">
+                <div class="absolute inset-0 bg-gradient-to-t from-on-background/80 to-transparent z-10"></div>
+                <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf5QaTRt0IerEoVTgTcRLGNeY2dBtlAwO70eLOaMCjMpIruwVoYu4TKAnVZMo2kFiGX5Zztdn0KtZY3lD98j76aYn_j6ap8V4eyw78M8uGoeEphFYYE7CYa4Ozdz0dYNnnjA7QIL8cSCW3TJzEXTK2jYsIP2zr-JYGX46leekYl0ukrcpvqdiHYGwBz1FtkTx7DZzhdh4TcIrsvsth0afhJr_MS0sjvqGyDBz4xfxz1XRLn1l7LiRHxfp63v-M-XZGUd84FV7S_Vo" alt="Campus"/>
+                <div class="absolute bottom-4 left-4 z-20 text-on-primary">
+                    <p class="text-[10px] uppercase tracking-widest opacity-80">Campus Update</p>
+                    <p class="font-bold text-body-lg">New Quiet Study Pods now available in Library East.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function switchTab(type, element) {
+        // Update Tab UI
+        const buttons = element.parentElement.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.classList.remove('bg-surface', 'text-primary', 'shadow-sm');
+            btn.classList.add('text-secondary', 'hover:bg-surface/50');
+        });
+        element.classList.add('bg-surface', 'text-primary', 'shadow-sm');
+        element.classList.remove('text-secondary', 'hover:bg-surface/50');
+
+        // This is a mockup, in a real app we would filter the list
+        const section = document.getElementById('pending-section');
+        section.style.opacity = '0';
+        setTimeout(() => {
+            section.style.opacity = '1';
+            // Note: Logic for swapping actual content cards for Submitted/Checked tabs would go here
+        }, 200);
+    }
+
+    // Add a simple hover effect for cards
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-2px)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+{% endblock %}

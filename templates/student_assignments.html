@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments — Student Portal</title>
+<link rel="stylesheet" href="{% static 'css/hod.css' %}">
+<style>
+.assignments-table { width: 100%; border-collapse: collapse; }
+.assignments-table th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+.assignments-table td { padding: 16px; border-bottom: 1px solid var(--border-light); font-size: 13px; }
+.assignments-table tr:hover { background: var(--surface-2); }
+.assignments-table tr:last-child td { border-bottom: none; }
+.status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.status-badge.pending { background: var(--warning-light); color: var(--warning); }
+.status-badge.submitted { background: var(--success-light); color: var(--success); }
+.status-badge.late { background: var(--danger-light); color: var(--danger); }
+.status-badge.graded { background: var(--primary-light); color: var(--primary); }
+.filter-bar { display: flex; gap: 12px; margin-bottom: 20px; align-items: center; }
+.search-input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; }
+.filter-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; transition: all 0.15s; background: var(--surface); }
+.filter-btn:hover, .filter-btn.active { background: var(--primary-light); border-color: var(--primary-mid); color: var(--primary); }
+.priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.priority-high { background: var(--danger); }
+.priority-medium { background: var(--warning); }
+.priority-low { background: var(--success); }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-mount"></div>
+  <main class="main">
+    <div id="topbar-mount"></div>
+    <div class="page-content">
+
+      <div class="dash-hero">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1>Assignments</h1>
+            <p>12 assignments • 3 due this week</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" class="search-input" placeholder="Search assignments by title, subject, or status...">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Pending</button>
+        <button class="filter-btn">Submitted</button>
+        <button class="filter-btn">Graded</button>
+      </div>
+
+      <div class="card">
+        <table class="assignments-table">
+          <thead>
+            <tr>
+              <th>Assignment</th>
+              <th>Subject</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Grade</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">Binary Tree Implementation</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Implement in-order, pre-order, and post-order traversal</div>
+              </td>
+              <td>Data Structures</td>
+              <td>
+                <div style="font-weight: 500">Tomorrow</div>
+                <div style="font-size: 11px; color: var(--danger)">11:59 PM</div>
+              </td>
+              <td><span class="status-badge pending"><span class="priority-dot priority-high"></span>Pending</span></td>
+              <td>—</td>
+              <td>
+                <button class="btn btn-sm btn-primary" onclick="showToast('Submit assignment modal coming soon', 'info')">Submit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">DBMS Project Report</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Design and document a complete database system</div>
+              </td>
+              <td>DBMS</td>
+              <td>
+                <div style="font-weight: 500">In 3 days</div>
+                <div style="font-size: 11px; color: var(--text-muted)">Jul 3, 2026</div>
+              </td>
+              <td><span class="status-badge pending"><span class="priority-dot priority-medium"></span>Pending</span></td>
+              <td>—</td>
+              <td>
+                <button class="btn btn-sm btn-primary" onclick="showToast('Submit assignment modal coming soon', 'info')">Submit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">OS Lab - Process Scheduling</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Implement FCFS and SJF scheduling algorithms</div>
+              </td>
+              <td>Operating Systems</td>
+              <td>
+                <div style="font-weight: 500">In 5 days</div>
+                <div style="font-size: 11px; color: var(--text-muted)">Jul 5, 2026</div>
+              </td>
+              <td><span class="status-badge pending"><span class="priority-dot priority-low"></span>Pending</span></td>
+              <td>—</td>
+              <td>
+                <button class="btn btn-sm btn-primary" onclick="showToast('Submit assignment modal coming soon', 'info')">Submit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">Network Topologies Analysis</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Compare different network topologies with diagrams</div>
+              </td>
+              <td>Computer Networks</td>
+              <td>
+                <div style="font-weight: 500">Jun 25, 2026</div>
+                <div style="font-size: 11px; color: var(--text-muted)">5 days ago</div>
+              </td>
+              <td><span class="status-badge submitted">Submitted</span></td>
+              <td>—</td>
+              <td>
+                <button class="btn btn-sm" style="border: 1px solid var(--border)">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">SQL Queries Practice</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Write 20 complex SQL queries with explanations</div>
+              </td>
+              <td>DBMS</td>
+              <td>
+                <div style="font-weight: 500">Jun 20, 2026</div>
+                <div style="font-size: 11px; color: var(--text-muted)">10 days ago</div>
+              </td>
+              <td><span class="status-badge graded">Graded</span></td>
+              <td><span style="font-weight: 600; color: var(--success)">18/20</span></td>
+              <td>
+                <button class="btn btn-sm" style="border: 1px solid var(--border)">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">Sorting Algorithms</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Implement bubble, merge, and quick sort with analysis</div>
+              </td>
+              <td>Data Structures</td>
+              <td>
+                <div style="font-weight: 500">Jun 15, 2026</div>
+                <div style="font-size: 11px; color: var(--danger)">15 days ago</div>
+              </td>
+              <td><span class="status-badge late">Late</span></td>
+              <td>—</td>
+              <td>
+                <button class="btn btn-sm btn-primary" onclick="showToast('Submit assignment modal coming soon', 'info')">Submit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--text-primary)">Memory Management</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px">Explain paging, segmentation, and virtual memory</div>
+              </td>
+              <td>Operating Systems</td>
+              <td>
+                <div style="font-weight: 500">Jun 10, 2026</div>
+                <div style="font-size: 11px; color: var(--text-muted)">20 days ago</div>
+              </td>
+              <td><span class="status-badge graded">Graded</span></td>
+              <td><span style="font-weight: 600; color: var(--success)">19/20</span></td>
+              <td>
+                <button class="btn btn-sm" style="border: 1px solid var(--border)">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  setStudentUrls({
+    dashboard: "{% url 'dashboard' %}",
+    notes: "{% url 'my_notes' %}",
+    smart_notes: "{% url 'smart_notes' %}",
+    assignments: "{% url 'assignments' %}",
+    calendar: "{% url 'academic_calendar' %}",
+    profile: "{% url 'student_profile' %}",
+    results: "{% url 'dashboard' %}",
+  });
+</script>
+<script src="{% static 'js/student.js' %}"></script>
+<script>
+  document.getElementById('sidebar-mount').innerHTML = renderSidebar('assignments');
+  document.getElementById('topbar-mount').innerHTML = renderTopbar('Assignments');
+</script>
+</body>
+</html>

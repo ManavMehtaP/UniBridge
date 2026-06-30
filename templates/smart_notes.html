@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}UniBridge | Smart Notes{% endblock %}
+
+{% block content %}
+<div class="p-6 md:p-8 max-w-container-max mx-auto w-full space-y-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-background">Smart Notes</h2>
+            <p class="text-secondary font-body-md mt-1">AI-powered note generation and summarization</p>
+        </div>
+        <span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">AI POWERED</span>
+    </div>
+
+    <!-- AI Input Section -->
+    <div class="glass-ai rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-4">
+            <span class="material-symbols-outlined text-tertiary text-2xl">auto_awesome</span>
+            <h3 class="font-title-lg text-title-lg font-bold">Generate Smart Notes</h3>
+        </div>
+        <textarea class="w-full bg-surface-container-low rounded-xl p-4 text-body-md border-none focus:ring-2 focus:ring-primary/20 resize-none" rows="4" placeholder="Paste your lecture notes, textbook content, or study material here..."></textarea>
+        <div class="flex items-center justify-between mt-4">
+            <div class="flex items-center gap-4">
+                <button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors text-sm">
+                    <span class="material-symbols-outlined text-sm">summarize</span>
+                    Summarize
+                </button>
+                <button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors text-sm">
+                    <span class="material-symbols-outlined text-sm">quiz</span>
+                    Generate Quiz
+                </button>
+            </div>
+            <button class="bg-primary text-on-primary px-6 py-2 rounded-xl font-label-md flex items-center gap-2 hover:opacity-90 transition-all">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                Generate
+            </button>
+        </div>
+    </div>
+
+    <!-- Recent Smart Notes -->
+    <div class="space-y-4">
+        <h3 class="font-headline-md text-headline-md text-on-background">Recent Smart Notes</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white rounded-2xl p-6 border border-outline-variant hover:shadow-md transition-all">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-symbols-outlined text-tertiary">auto_awesome</span>
+                    <span class="text-sm font-semibold text-tertiary">AI Generated</span>
+                </div>
+                <h4 class="font-title-lg text-title-lg font-bold text-on-background mb-2">Python Data Structures Summary</h4>
+                <p class="text-body-md text-on-surface-variant line-clamp-2">Comprehensive summary of lists, tuples, dictionaries, and sets with usage examples.</p>
+                <div class="flex items-center gap-2 mt-4 text-secondary text-sm">
+                    <span>Generated 2 days ago</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 border border-outline-variant hover:shadow-md transition-all">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-symbols-outlined text-tertiary">auto_awesome</span>
+                    <span class="text-sm font-semibold text-tertiary">AI Generated</span>
+                </div>
+                <h4 class="font-title-lg text-title-lg font-bold text-on-background mb-2">Algorithm Complexity Analysis</h4>
+                <p class="text-body-md text-on-surface-variant line-clamp-2">Big O notation explained with common algorithm examples and time complexity comparisons.</p>
+                <div class="flex items-center gap-2 mt-4 text-secondary text-sm">
+                    <span>Generated 5 days ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
