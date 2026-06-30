@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniBridge | Student Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e4e1e9",
+                        "surface-container": "#efedf4",
+                        "on-primary-fixed-variant": "#333f91",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-background": "#1b1b21",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#303036",
+                        "background": "#fbf8ff",
+                        "surface-container-low": "#f5f2fa",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#000d60",
+                        "primary-container": "#2e3a8c",
+                        "secondary-container": "#d0e1fb",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#500aba",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c6c5d3",
+                        "surface-container-high": "#e9e7ef",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "outline": "#767682",
+                        "surface-tint": "#4b57aa",
+                        "surface": "#fbf8ff",
+                        "on-tertiary-container": "#bba0ff",
+                        "surface-container-highest": "#e4e1e9",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf8ff",
+                        "inverse-primary": "#bcc3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dbd9e1",
+                        "on-secondary-container": "#54647a",
+                        "on-surface": "#1b1b21",
+                        "tertiary": "#370086",
+                        "primary-fixed": "#dfe0ff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#454651",
+                        "on-primary-container": "#9ea9ff",
+                        "primary-fixed-dim": "#bcc3ff",
+                        "primary": "#142175",
+                        "inverse-on-surface": "#f2eff7",
+                        "on-tertiary-fixed": "#23005c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e9ddff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "xl": "40px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "sidebar-width": "260px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-ai {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        body {
+            background-color: #fbf8ff;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- Sidebar Shell -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface border-r border-outline-variant flex flex-col py-6 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">UniBridge</h1>
+<p class="font-label-md text-label-md text-secondary opacity-70">Academic Portal</p>
+</div>
+<button class="mx-6 mb-8 py-3 bg-primary text-on-primary rounded-xl font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">add</span>
+            New Note
+        </button>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- My Notes -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">My Notes</span>
+</a>
+<!-- Smart Notes -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">Smart Notes</span>
+</a>
+<!-- Academic Calendar -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Academic Calendar</span>
+</a>
+<!-- Assignments -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Assignments</span>
+</a>
+<!-- Attendance -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-label-md text-label-md">Attendance</span>
+</a>
+<!-- Announcements -->
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-md text-label-md">Announcements</span>
+</a>
+<!-- Profile (ACTIVE) -->
+<a class="flex items-center gap-3 px-6 py-3 text-primary font-medium relative before:absolute before:left-0 before:w-1 before:h-6 before:bg-primary before:rounded-full bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<div class="mt-auto px-6">
+<a class="flex items-center gap-3 py-3 text-secondary hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] min-h-screen">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 bg-surface/70 backdrop-blur-xl border-b border-outline-variant h-16 flex items-center justify-between px-8">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container border-none rounded-full focus:ring-2 focus:ring-primary/20 font-body-md text-body-md" placeholder="Search academic resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young university student with a friendly expression, captured in soft studio lighting. The background is a clean, minimalist academic office setting with neutral tones. The student has dark hair and is wearing a modern casual blazer, reflecting a smart and ambitious persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbBYC96gxGjBeD91guDHRXY2KRmxzJpuacV5kXwqZToffl0Da32j-lTKrUKXbG4g693VH9qVQqwV-z1LSANT7cA_Fg_yHjwFboej1sLYsNJGJtbRdjhwFK_38Y4B2omqdQ2V7O8I2F5HBHfjp6DhzuonaERqMh7x4RM76LZ8-aKUW0_EKrfAS4CPk7iacBuTWqUCvw20Lbxke5UalwkDd9QHyv1_Via9Qqsiz2lQVKRJsjk_rnK7GxFXDwjb5r42UgWykosuC2DzU"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-8 max-w-[1280px] mx-auto space-y-8">
+<!-- Profile Header -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 flex flex-col md:flex-row items-center md:items-end gap-8 relative overflow-hidden shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<!-- Background Decorative Element -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20"></div>
+<div class="relative">
+<div class="w-32 h-32 rounded-2xl overflow-hidden border-4 border-white shadow-lg">
+<img class="w-full h-full object-cover" data-alt="A high-quality, professional portrait of a male university student in his early twenties. He is standing in a brightly lit, modern university atrium with large glass windows and contemporary architecture in the background. He wears a neutral-colored sweater and carries a confident yet approachable look. The lighting is natural and flattering, emphasizing a bright, scholarly atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-rFjOxfLy5f8z88ppO_sO5E6uKVPFmXQyzYpljhvNoe3zxOMz-8a3riCw6SbA7K5dOIsSTBJFDz63ZSd1xeXM6PTEEwQHeGPruJBStjljUqO_mlNb2yef5akUXW6b7Jv8GrM8X9oFrOBn5ZJIvTy4SSHjFgOlodFIqjjYJadiHfPqp7onaj8LeG7FHJbvdLS-kQuuSpfgZIipH0nSem1UJByK3LFDWQCV8PFo0eK7pwKTFz_hxi8zVJzyMELrvoufhkCX9IIuxxY"/>
+</div>
+<button class="absolute -bottom-2 -right-2 bg-primary text-on-primary p-2 rounded-full shadow-md hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<div class="flex-1 text-center md:text-left space-y-2">
+<div class="flex flex-col md:flex-row md:items-center gap-3">
+<h2 class="font-headline-lg text-headline-lg text-primary">Alex J. Kensington</h2>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">Active Student</span>
+</div>
+<div class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-outline">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span class="font-body-md text-body-md">EN-2024-8842</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Main Campus, Sector 4</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 border border-outline text-secondary font-medium rounded-lg hover:bg-surface-variant/20 transition-all">Download Transcript</button>
+<button class="px-6 py-2.5 bg-primary text-on-primary font-medium rounded-lg hover:opacity-90 shadow-md transition-all">Edit Profile</button>
+</div>
+</div>
+<!-- Dashboard Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Details & Faculty -->
+<div class="lg:col-span-1 space-y-8">
+<!-- Details Grid -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<h3 class="font-title-lg text-title-lg text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">contact_mail</span>
+                            Personal Information
+                        </h3>
+<div class="space-y-6">
+<div>
+<label class="font-label-md text-label-md text-outline uppercase block mb-1">Email Address</label>
+<p class="font-body-lg text-body-lg text-on-surface">alex.kensington@unibridge.edu</p>
+</div>
+<div>
+<label class="font-label-md text-label-md text-outline uppercase block mb-1">Academic Branch</label>
+<p class="font-body-lg text-body-lg text-on-surface">Computer Science & Artificial Intelligence</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="font-label-md text-label-md text-outline uppercase block mb-1">Current Semester</label>
+<p class="font-body-lg text-body-lg text-on-surface">6th Semester</p>
+</div>
+<div>
+<label class="font-label-md text-label-md text-outline uppercase block mb-1">Admission Batch</label>
+<p class="font-body-lg text-body-lg text-on-surface">2021-2025</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Assigned Faculty -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<h3 class="font-title-lg text-title-lg text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">supervisor_account</span>
+                            Academic Mentor
+                        </h3>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="w-14 h-14 rounded-full overflow-hidden border border-outline-variant/50">
+<img class="w-full h-full object-cover" data-alt="A professional and intellectual-looking portrait of a female university professor in her late 40s. She is wearing glasses and a smart academic attire. She is in a library setting with bookshelves softly blurred in the background. The lighting is warm and scholarly, conveying wisdom and experience in a modern academic environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyYlwUjY3Dexl71c6ClTA8ZUrywai9uCbc1WYeInaYMfdR0w2HLjrtFgZ_JIAxaHMjCtkjXsia_lVRt7ZlY1w2W9LOB8cZHvIG5ANo5jXWYhUqKv6HJ4uIm5H3FR7FFmMMkEvtn2R28JKYAO-wk0Z2kKEKVMjpLtmeTI7upXZ28lGOblfqnQD14n8T-oeIYPHUGm4FS6DR0ufF6sKdLAhkFV2313_A1p32xuBiMxZ2p04tEOQXfMelFVKeXUTwsOQbGO2RIxqqBhk"/>
+</div>
+<div>
+<p class="font-title-lg text-title-lg text-on-surface leading-tight">Dr. Sarah Vance</p>
+<p class="font-body-md text-body-md text-outline">Dean of AI Research</p>
+</div>
+<button class="ml-auto p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Subjects & AI Insights -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Enrolled Subjects List -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-title-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">menu_book</span>
+                                Enrolled Subjects
+                            </h3>
+<span class="font-label-md text-label-md text-secondary">Semester 6 • Spring 2024</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Subject Card -->
+<div class="p-4 rounded-xl border border-outline-variant hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded">92% Att.</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface mb-1">Deep Learning Models</h4>
+<p class="font-label-md text-label-md text-outline mb-4">CS-601 • Dr. Marcus Thorne</p>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]" style="width: 85%;"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="font-label-md text-label-md text-outline">Progress</span>
+<span class="font-label-md text-label-md text-primary font-bold">85%</span>
+</div>
+</div>
+<!-- Subject Card -->
+<div class="p-4 rounded-xl border border-outline-variant hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">database</span>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded">98% Att.</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface mb-1">Distributed Systems</h4>
+<p class="font-label-md text-label-md text-outline mb-4">CS-603 • Prof. Elena Rossi</p>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[60%]" style="width: 60%;"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="font-label-md text-label-md text-outline">Progress</span>
+<span class="font-label-md text-label-md text-primary font-bold">60%</span>
+</div>
+</div>
+<!-- Subject Card -->
+<div class="p-4 rounded-xl border border-outline-variant hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 bg-amber-100 text-amber-700 rounded">78% Att.</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface mb-1">Cyber Security Ethics</h4>
+<p class="font-label-md text-label-md text-outline mb-4">CS-608 • Dr. Julian S.</p>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[45%]" style="width: 45%;"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="font-label-md text-label-md text-outline">Progress</span>
+<span class="font-label-md text-label-md text-primary font-bold">45%</span>
+</div>
+</div>
+<!-- Subject Card -->
+<div class="p-4 rounded-xl border border-outline-variant hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">language</span>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded">95% Att.</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface mb-1">Cloud Architecture</h4>
+<p class="font-label-md text-label-md text-outline mb-4">CS-612 • Dr. Linda Wu</p>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[72%]" style="width: 72%;"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="font-label-md text-label-md text-outline">Progress</span>
+<span class="font-label-md text-label-md text-primary font-bold">72%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Academic Insights -->
+<section class="glass-ai rounded-xl p-6 relative overflow-hidden">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-weight="fill">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-tertiary">Smart Academic Insights</h3>
+<p class="font-label-md text-label-md text-on-tertiary-fixed-variant">AI-generated based on your recent activity</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-white/40 p-4 rounded-lg border border-violet-100 flex gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1">trending_up</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Strong Performance in Deep Learning</p>
+<p class="font-body-md text-body-md text-outline">Your recent quiz scores place you in the top 5% of the class. Consider applying for the TA position in Semester 7.</p>
+</div>
+</div>
+<div class="bg-white/40 p-4 rounded-lg border border-violet-100 flex gap-4">
+<span class="material-symbols-outlined text-amber-600 mt-1">lightbulb</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Concept Recommendation</p>
+<p class="font-body-md text-body-md text-outline">Based on your "Distributed Systems" notes, you might find the "Paxos Consensus" module helpful for your upcoming project.</p>
+</div>
+</div>
+</div>
+<!-- Interactive Micro-interaction Layer -->
+<div class="absolute -bottom-12 -right-12 w-48 h-48 bg-tertiary/5 rounded-full blur-3xl"></div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for hover states and cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simulating loading state for AI section
+        setTimeout(() => {
+            const aiSection = document.querySelector('.glass-ai');
+            if (aiSection) {
+                aiSection.classList.add('transition-all', 'duration-700', 'opacity-100');
+            }
+        }, 300);
+    </script>
+</body></html>
