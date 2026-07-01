@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — UniPortal</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+html, body { height: 100%; overflow: hidden; }
+
+.login-wrap {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+  background: #DCEBFB url('assets/login-bg.png') no-repeat left center;
+  background-size: cover;
+}
+
+/* Left side is the image itself (already has logo+text baked in via bg image),
+   we just reserve space for it and let the bg image show through. */
+.login-left {
+  flex: 1 1 58%;
+  position: relative;
+}
+
+/* Right panel: white card with the form */
+.login-right {
+  flex: 0 0 520px;
+  background: #FFFFFF;
+  box-shadow: -8px 0 40px rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.login-form-inner { width: 100%; max-width: 360px; }
+
+.login-form-inner h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.login-form-inner .sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  margin-bottom: 32px;
+}
+
+.field-group { margin-bottom: 20px; }
+.field-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: block;
+}
+.field-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.field-input-wrap svg.left-icon {
+  position: absolute;
+  left: 14px;
+  color: #94A3B8;
+  pointer-events: none;
+}
+.field-input-wrap input {
+  width: 100%;
+  padding: 13px 14px 13px 42px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #FAFBFC;
+}
+.field-input-wrap input::placeholder { color: #94A3B8; }
+.field-input-wrap input:focus {
+  border-color: var(--primary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+.field-input-wrap .toggle-eye {
+  position: absolute;
+  right: 14px;
+  cursor: pointer;
+  color: #94A3B8;
+  background: none;
+  border: none;
+  display: flex;
+  padding: 0;
+}
+.field-input-wrap .toggle-eye:hover { color: var(--text-secondary); }
+
+.row-between { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.remember-me { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-secondary); cursor: pointer; }
+.remember-me input { width: 15px; height: 15px; accent-color: var(--primary); cursor: pointer; }
+.forgot-link { font-size: 13px; font-weight: 600; color: var(--primary); text-decoration: none; }
+.forgot-link:hover { text-decoration: underline; }
+
+.signin-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s, transform 0.1s;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+}
+.signin-btn:hover { background: var(--primary-dark); }
+.signin-btn:active { transform: scale(0.99); }
+.signin-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.divider-row { display: flex; align-items: center; gap: 12px; margin: 22px 0; }
+.divider-row .line { flex: 1; height: 1px; background: #E2E8F0; }
+.divider-row span { font-size: 12px; color: #94A3B8; font-weight: 500; }
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.google-btn:hover { background: #F8FAFC; border-color: #CBD5E1; }
+
+.signup-line { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 28px; }
+.signup-line a { color: var(--primary); font-weight: 600; text-decoration: none; }
+.signup-line a:hover { text-decoration: underline; }
+
+/* Role selector chips */
+.role-tabs {
+  display: flex;
+  background: #F1F5F9;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+  gap: 4px;
+}
+.role-tab {
+  flex: 1;
+  text-align: center;
+  padding: 9px 6px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.role-tab.active { background: #FFFFFF; color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+.error-msg {
+  display: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  align-items: center;
+  gap: 7px;
+}
+.error-msg.show { display: flex; }
+
+/* ===== RESPONSIVE: TABLET / MOBILE ===== */
+@media (max-width: 980px) {
+  .login-wrap {
+    flex-direction: column;
+    background-image: url('assets/login-bg-mobile.png');
+    background-position: top center;
+    background-size: cover;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  html, body { overflow: auto; }
+  .login-left {
+    flex: none;
+    height: 46vh;
+    min-height: 320px;
+  }
+  .login-right {
+    flex: none;
+    width: 100%;
+    box-shadow: 0 -10px 40px rgba(15,23,42,0.10);
+    border-radius: 24px 24px 0 0;
+    margin-top: -24px;
+    padding: 36px 24px 40px;
+  }
+  .login-form-inner { max-width: 420px; }
+}
+
+@media (max-width: 480px) {
+  .login-left { height: 38vh; min-height: 260px; }
+  .login-form-inner h1 { font-size: 24px; }
+  .login-right { padding: 30px 18px 36px; }
+}
+</style>
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="login-left"></div>
+
+  <div class="login-right">
+    <div class="login-form-inner">
+      <h1>Welcome Back!</h1>
+      <div class="sub">Sign in to continue to your dashboard</div>
+
+      <div class="role-tabs">
+        <div class="role-tab active" data-role="HOD" onclick="selectRole(this)">HOD</div>
+        <div class="role-tab" data-role="FACULTY" onclick="selectRole(this)">Faculty</div>
+        <div class="role-tab" data-role="STUDENT" onclick="selectRole(this)">Student</div>
+      </div>
+
+      <div class="error-msg" id="login-error">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="login-error-text">Invalid email or password. Please try again.</span>
+      </div>
+
+      <form id="login-form" onsubmit="return handleLogin(event)">
+        <div class="field-group">
+          <label class="field-label">Email or Username</label>
+          <div class="field-input-wrap">
+            <svg class="left-icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="login-email" placeholder="Enter your email or username" autocomplete="username" required>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Password</label>
+          <div class="field-input-wrap">
+            <svg class="left-icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password" required>
+            <button type="button" class="toggle-eye" onclick="togglePassword()">
+              <svg id="eye-icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row-between">
+          <label class="remember-me">
+            <input type="checkbox" id="remember-me">
+            Remember me
+          </label>
+          <a href="#" class="forgot-link" onclick="showToast('Password reset link sent to admin','success');return false;">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="signin-btn" id="signin-btn">
+          <span id="signin-text">Sign In</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+
+      <div class="divider-row"><div class="line"></div><span>or</span><div class="line"></div></div>
+
+      <button type="button" class="google-btn" onclick="showToast('Google sign-in not configured for this tenant','')">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84c-.21 1.13-.84 2.08-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.81 5.96-2.18l-2.92-2.26c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33C2.44 15.98 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.97 10.72c-.18-.54-.28-1.12-.28-1.72s.1-1.18.28-1.72V4.95H.96A8.996 8.996 0 0 0 0 9c0 1.45.35 2.83.96 4.05l3.01-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.59-2.59C13.46.89 11.43 0 9 0 5.48 0 2.44 2.02.96 4.95l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58z"/></svg>
+        Sign in with Google
+      </button>
+
+      <div class="signup-line">Don't have an account? <a href="#" onclick="showToast('Contact your university administrator','');return false;">Contact Administrator</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container"></div>
+<script src="shared.js"></script>
+<script>
+let selectedRole = 'HOD';
+
+function selectRole(el) {
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  selectedRole = el.dataset.role;
+  document.getElementById('login-email').placeholder =
+    selectedRole === 'STUDENT' ? 'Enter enrollment no. or email' : 'Enter your email or username';
+}
+
+function togglePassword() {
+  const pw = document.getElementById('login-password');
+  const isPw = pw.type === 'password';
+  pw.type = isPw ? 'text' : 'password';
+  document.getElementById('eye-icon').innerHTML = isPw
+    ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+    : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errorBox = document.getElementById('login-error');
+  errorBox.classList.remove('show');
+
+  if (!email || !password) {
+    document.getElementById('login-error-text').textContent = 'Please fill in all fields.';
+    errorBox.classList.add('show');
+    return false;
+  }
+
+  const btn = document.getElementById('signin-btn');
+  const text = document.getElementById('signin-text');
+  btn.disabled = true;
+  text.textContent = 'Signing in…';
+
+  // Simulated auth — wire this up to POST /auth/login in production
+  setTimeout(() => {
+    if (selectedRole === 'HOD') {
+      window.location.href = 'dashboard.html';
+    } else {
+      // Faculty/Student dashboards not yet built in this phase
+      showToast(`${selectedRole.charAt(0) + selectedRole.slice(1).toLowerCase()} portal coming in next phase`, '');
+      btn.disabled = false;
+      text.textContent = 'Sign In';
+    }
+  }, 900);
+
+  return false;
+}
+</script>
+</body>
+</html>
